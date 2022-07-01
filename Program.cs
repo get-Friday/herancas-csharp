@@ -11,6 +11,18 @@ internal class Program
 
         const double taxa = 0.02;
         CartaoVA va = new CartaoVA("mastercard", 100.0, taxa);
-        Console.WriteLine($"Taxa do cartão: {va.VerificarValorTaxaCartao()}");    
+        Console.WriteLine($"Taxa do cartão: {va.VerificarValorTaxaCartao()}"); 
+        
+        // upcasting
+        Cartao cartao = va;
+        if (cartao is CartaoVA)
+        {
+            CartaoVA cartaoDowncasting = (CartaoVA)cartao;
+            Console.WriteLine("Downcasting de Cartão para CartãoVA completo");
+        }
+        else
+        {
+            Console.WriteLine("Downcasting inválido");
+        }
     }
 }
