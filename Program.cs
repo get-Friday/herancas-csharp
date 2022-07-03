@@ -1,6 +1,7 @@
 ﻿using System;
 using herancas.Funcionario;
 using herancas.Cartoes;
+using System.Text.RegularExpressions;
 
 internal class Program
 {
@@ -32,15 +33,16 @@ internal class Program
         // TRATAMENTO EXCEÇÕES
         Console.WriteLine("\nTratamento exceções: ");
         Empregado Maria = new Empregado(1, "Maria"); // null pra gritar exception
+
         try
         {
+            ValidarEmpregado(Maria);
             MostrarEmpregado(Maria);
         }
         catch (Exception err)
         {
             Console.WriteLine(err.Message);
         }
-
 
         static void MostrarEmpregado(Empregado obj)
         {
@@ -52,6 +54,16 @@ internal class Program
                 $"Nome do empregado: {obj.nome}" +
                 $"\nId do empregado: {obj.id}"
                 );
+        }
+        static void ValidarEmpregado(Empregado obj)
+        {
+            Regex regexLetras = new Regex("^[a-zA-Z]+$");
+            Regex regexNumeros = new Regex("^[0-9]+$");
+
+            if (!regexLetras.IsMatch(obj.nome) || !regexNumeros.IsMatch($"{obj.id}"))
+            {
+                throw new Exception();
+            }
         }
     }
 }
